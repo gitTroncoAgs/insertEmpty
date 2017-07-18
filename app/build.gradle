@@ -1,0 +1,79 @@
+apply plugin: 'com.android.application'
+
+
+repositories {
+    maven { url 'https://maven.fabric.io/public' }
+    flatDir {
+        dirs 'libs'
+    }
+
+    // Insert.io
+    maven {
+        url "http://software.insert.io/artifactory/android-sdk-externals"
+    }
+    maven {
+        url "http://software.insert.io/artifactory/android-release"
+    }
+    mavenCentral()
+}
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+    defaultConfig {
+        applicationId "com.axa.dtroncoso.insertio"
+        minSdkVersion 17
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        debug{
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+repositories {
+    // Insert.io
+    maven {
+        url "http://software.insert.io/artifactory/android-sdk-externals"
+    }
+    maven {
+        url "http://software.insert.io/artifactory/android-release"
+    }
+    mavenCentral()
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    testCompile 'junit:junit:4.12'
+
+    compile 'com.squareup.okhttp3:okhttp-urlconnection:3.8.1'
+    compile 'com.squareup.okhttp3:okhttp:3.8.1', {
+        // It's needed to solve problems with Insert.io
+        exclude group: 'com.squareup.okhttp3', module: 'okhttp-ws'
+    }
+    compile 'com.squareup.okhttp3:logging-interceptor:3.8.1'
+
+    /**
+     * Insert.io
+     */
+    compile group:'sdk.insert.io' , name:'insertIO', version:'1.44.44.+', changing:true, {
+        exclude group: 'com.squareup.okhttp3', module: 'okhttp-ws'
+    }
+    compile('io.socket:socket.io-client:0.8.3') {
+        exclude group: 'org.json', module: 'json'
+    }
+}
