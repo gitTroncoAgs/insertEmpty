@@ -61,19 +61,15 @@ dependencies {
     testCompile 'junit:junit:4.12'
 
     compile 'com.squareup.okhttp3:okhttp-urlconnection:3.8.1'
-    compile 'com.squareup.okhttp3:okhttp:3.8.1', {
-        // It's needed to solve problems with Insert.io
-        exclude group: 'com.squareup.okhttp3', module: 'okhttp-ws'
-    }
+    compile 'com.squareup.okhttp3:okhttp:3.8.1'
+
     compile 'com.squareup.okhttp3:logging-interceptor:3.8.1'
 
     /**
      * Insert.io
      */
-    compile group:'sdk.insert.io' , name:'insertIO', version:'1.44.44.+', changing:true, {
+    compile group:'sdk.insert.io' , name:'insertIO', version:'1.48.48.+', changing:true,{
         exclude group: 'com.squareup.okhttp3', module: 'okhttp-ws'
-    }
-    compile('io.socket:socket.io-client:0.8.3') {
-        exclude group: 'org.json', module: 'json'
+        exclude group: 'com.squareup.okhttp3', module: 'okhttp'
     }
 }
