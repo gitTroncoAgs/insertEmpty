@@ -16,6 +16,8 @@
 #   public *;
 #}
 
+# Insert.io solution to allow optimize the app
+-optimizations !code/allocation/variable
 
 -keepattributes Annotation
 -keep class okhttp3.** { *; }
