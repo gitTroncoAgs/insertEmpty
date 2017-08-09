@@ -41,7 +41,6 @@ android {
 }
 
 repositories {
-    // Insert.io
     maven {
         url "http://software.insert.io/artifactory/android-sdk-externals"
     }
@@ -52,6 +51,7 @@ repositories {
 }
 
 dependencies {
+
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
@@ -60,16 +60,16 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
 
-    compile 'com.squareup.okhttp3:okhttp-urlconnection:3.8.1'
-    compile 'com.squareup.okhttp3:okhttp:3.8.1'
-
-    compile 'com.squareup.okhttp3:logging-interceptor:3.8.1'
-
     /**
-     * Insert.io
+     * Insert and dependencies
      */
-    compile group:'sdk.insert.io' , name:'insertIO', version:'1.48.48.+', changing:true,{
+    compile 'com.squareup.okhttp3:okhttp:3.8.1', {
         exclude group: 'com.squareup.okhttp3', module: 'okhttp-ws'
-        exclude group: 'com.squareup.okhttp3', module: 'okhttp'
+    }
+    compile group: 'sdk.insert.io', name: 'insertIO', version: '1.44.44.+', changing: true, {
+        exclude group: 'com.squareup.okhttp3', module: 'okhttp-ws'
+    }
+    compile('io.socket:socket.io-client:0.8.3') {
+        exclude group: 'org.json', module: 'json'
     }
 }
